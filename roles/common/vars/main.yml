@@ -1,1 +1,2 @@
+hostname: Delfino
 screenshotDir: "{{ ansible_env.HOME }}/Documents/Screenshots"

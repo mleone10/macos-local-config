@@ -4,6 +4,14 @@
     path: "{{ screenshotDir }}"
     state: directory
 
+- name: set hostname
+  ansible.builtin.command: "{{ item }}"
+  loop:
+    - 'sudo scutil --set ComputerName {{ hostname }}'
+    - 'sudo scutil --set LocalHostName {{ hostname }}'
+    - 'sudo scutil --set HostName {{ hostname | lower }}'
+  become: true
+
 - name: install chrome
   community.general.homebrew_cask:
     name: google-chrome

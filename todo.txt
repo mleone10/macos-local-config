@@ -1,4 +1,0 @@
-# Developer Settings
-
-* Set hostname
-* Set terminal colors

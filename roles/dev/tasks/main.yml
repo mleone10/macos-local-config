@@ -43,3 +43,5 @@
 
 - name: set up git
   ansible.builtin.import_tasks: git.yml
+
+# TODO: set vim/iterm colors

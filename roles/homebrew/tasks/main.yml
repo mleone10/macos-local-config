@@ -1,0 +1,20 @@
+- name: check if homebrew is installed
+  ansible.builtin.stat:
+    path: "/opt/homebrew/bin/brew"
+  register: brew
+
+- name: install homebrew
+  ansible.builtin.shell:
+    cmd: 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  when: "brew.stat.exists == false"
+
+- name: ensure homebrew is easily accessible
+  ansible.builtin.lineinfile:
+    state: present
+    create: true
+    path: "~/.zshrc"
+    line: eval "$(/opt/homebrew/bin/brew shellenv)"
+
+- name: update homebrew
+  community.general.homebrew:
+   update_homebrew: true

@@ -1,0 +1,30 @@
+---
+- name: set git email address
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ gitEmail }}"
+
+- name: set git user name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "Mario Leone"
+
+- name: set git signing key format
+  community.general.git_config:
+    name: gpg.format
+    scope: global
+    value: ssh
+
+- name: set git signing key
+  community.general.git_config:
+    name: user.signingkey
+    scope: global
+    value: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
+
+- name: set git singing default
+  community.general.git_config:
+    name: commit.gpgsign
+    scope: global
+    value: true

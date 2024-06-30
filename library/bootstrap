@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+xcode-select --install
+pip3 install --user ansible

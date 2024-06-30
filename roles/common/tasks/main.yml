@@ -1,0 +1,22 @@
+---
+- name: ensure screenshot directory exists
+  ansible.builtin.file:
+    path: "{{ screenshotDir }}"
+    state: directory
+
+- name: install chrome
+  community.general.homebrew_cask:
+    name: google-chrome
+    state: latest
+
+- name: set macos settings
+  ansible.builtin.command: "{{ item }}"
+  loop:
+    - 'defaults write com.apple.dock persistent-others -array'
+    - 'defaults write com.apple.dock persistent-apps -array'
+    - 'defaults write com.apple.dock show-recents -bool false'
+    - 'defaults write com.apple.dock "tilesize" -int "48"'
+    - 'defaults write com.apple.dock "autohide" -bool "false"'
+    - 'defaults write com.apple.dock "mru-spaces" -bool "false"'
+    - 'defaults write com.apple.screencapture location {{ screenshotDir }}'
+    - 'defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false'

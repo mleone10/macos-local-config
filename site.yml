@@ -1,0 +1,19 @@
+#!/usr/bin/env ansible-playbook --ask-vault-pass
+---
+- hosts: localhost
+  roles:
+    - role: homebrew
+    - role: common
+    - role: dev
+
+  tasks:
+    - name: add apps to dock
+      ansible.builtin.script:
+        cmd: library/addAppToDock {{ item }}
+      loop:
+        - '/Applications/iTerm.app'
+        - '/Applications/Google\ Chrome.app'
+
+    - name: refresh dock
+      ansible.builtin.command:
+        cmd: killall Dock && killall WindowManager

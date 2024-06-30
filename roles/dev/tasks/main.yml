@@ -1,0 +1,44 @@
+---
+- name: set aliases
+  ansible.builtin.lineinfile:
+    state: present
+    create: true
+    path: "~/.zshrc"
+    line: "{{ item }}"
+  loop:
+    - 'alias gs="git status"'
+    - 'alias gl="git branch --list"'
+    - 'alias la="ls -lah"'
+
+- name: set terminal prompt
+  ansible.builtin.lineinfile:
+    state: present
+    create: true
+    path: "~/.zshrc"
+    line: "{{ item }}"
+  loop:
+    - 'PROMPT_EOL_MARK=""'
+    - 'PROMPT="%n@%m:%~$ "'
+
+- name: add ansible to path
+  ansible.builtin.lineinfile:
+    state: present
+    create: true
+    path: "~/.zshrc"
+    line: "PATH=$PATH:/Users/mario/Library/Python/3.9/bin/"
+
+- name: copy vimrc
+  ansible.builtin.copy:
+    src: vimrc
+    dest: /Users/mario/.vimrc
+
+- name: install homebrew cask packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - visual-studio-code
+    - iterm2
+
+- name: set up git
+  ansible.builtin.import_tasks: git.yml

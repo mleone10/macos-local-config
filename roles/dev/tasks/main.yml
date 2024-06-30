@@ -9,6 +9,7 @@
     - 'alias gs="git status"'
     - 'alias gl="git branch --list"'
     - 'alias la="ls -lah"'
+    - 'alias clera="clear"'
 
 - name: set terminal prompt
   ansible.builtin.lineinfile:

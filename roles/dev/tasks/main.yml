@@ -50,6 +50,7 @@
   loop:
     - colima
     - docker
+    - golang
 
 - name: start homebrew services
   ansible.builtin.command: "brew services start {{ item }}"

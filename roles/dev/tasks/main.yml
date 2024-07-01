@@ -30,6 +30,7 @@
   loop:
     - 'PROMPT_EOL_MARK=""'
     - 'PROMPT="%F{green}%n%f@%F{blue}%m:%~%f$ "'
+    - 'export CLICOLOR=1'
 
 - name: add ansible to path
   ansible.builtin.lineinfile:
@@ -51,6 +52,7 @@
     - colima
     - docker
     - golang
+    - awscli
 
 - name: start homebrew services
   ansible.builtin.command: "brew services start {{ item }}"

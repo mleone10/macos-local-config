@@ -1,13 +1,18 @@
 " Stop VI compatibility
 set nocompatible
 
-if filereadable(expand("~/.vimrc_background"))
-        let base16colorspace=256
-        source ~/.vimrc_background
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+call plug#begin()
+Plug 'tinted-theming/base16-vim'
+call plug#end()
+
+" Set colors
+colorscheme base16-default-dark
 
 " Show ruler
 set ruler
@@ -68,4 +73,3 @@ inoremap <right> <nop>
 " Move up and down by buffer line, not actual line
 nnoremap j gj
 nnoremap k gk
-

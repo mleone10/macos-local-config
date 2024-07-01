@@ -11,6 +11,13 @@
     - 'alias la="ls -lah"'
     - 'alias clera="clear"'
 
+- name: start ssh agent
+  ansible.builtin.lineinfile:
+    state: present
+    create: true
+    path: "~/.zshrc"
+    line: 'eval "$(ssh-agent -s)" &>/dev/null'
+
 - name: set terminal prompt
   ansible.builtin.lineinfile:
     state: present
@@ -19,7 +26,7 @@
     line: "{{ item }}"
   loop:
     - 'PROMPT_EOL_MARK=""'
-    - 'PROMPT="%n@%m:%~$ "'
+    - 'PROMPT="%F{green}%n%f@%F{blue}%m:%~%f$ "'
 
 - name: add ansible to path
   ansible.builtin.lineinfile:
@@ -43,5 +50,3 @@
 
 - name: set up git
   ansible.builtin.import_tasks: git.yml
-
-# TODO: set vim/iterm colors

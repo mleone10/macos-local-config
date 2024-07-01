@@ -16,7 +16,10 @@
     state: present
     create: true
     path: "~/.zshrc"
-    line: 'eval "$(ssh-agent -s)" &>/dev/null'
+    line: "{{ item }}"
+  loop:
+    - 'eval "$(ssh-agent -s)" &>/dev/null'
+    - 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519 &>/dev/null'
 
 - name: set terminal prompt
   ansible.builtin.lineinfile:

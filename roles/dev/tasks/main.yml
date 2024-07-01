@@ -43,8 +43,21 @@
     src: vimrc
     dest: /Users/mario/.vimrc
 
+- name: install homebrew packages
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - colima
+    - docker
+
+- name: start homebrew services
+  ansible.builtin.command: "brew services start {{ item }}"
+  loop:
+    - colima
+
 - name: install homebrew cask packages
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{{ item }}"
     state: latest
   loop:

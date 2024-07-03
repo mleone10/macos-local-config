@@ -8,6 +8,7 @@
   loop:
     - 'alias gs="git status"'
     - 'alias gl="git branch --list"'
+    - 'alias gr="git fetch --all && git reset --hard origin/main"'
     - 'alias la="ls -lah"'
     - 'alias clera="clear"'
 
@@ -49,6 +50,13 @@
     src: colima.yaml
     dest: "{{ ansible_env.HOME }}/.colima/default/colima.yaml"
 
+- name: add homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - hashicorp/tap
+
 - name: install homebrew packages
   community.general.homebrew:
     name: "{{ item }}"
@@ -58,6 +66,7 @@
     - docker
     - golang
     - awscli
+    - hashicorp/tap/terraform
 
 - name: start homebrew services
   ansible.builtin.command: "brew services restart {{ item }}"

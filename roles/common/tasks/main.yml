@@ -12,10 +12,13 @@
     - 'sudo scutil --set HostName {{ hostname | lower }}'
   become: true
 
-- name: install chrome
+- name: install casks
   community.general.homebrew_cask:
-    name: google-chrome
+    name: "{{ item }}"
     state: latest
+  loop:
+    - 'google-chrome'
+    - 'steam'
 
 - name: set macos settings
   ansible.builtin.command: "{{ item }}"

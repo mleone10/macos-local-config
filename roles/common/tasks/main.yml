@@ -19,6 +19,8 @@
   loop:
     - 'google-chrome'
     - 'steam'
+    - 'discord'
+    - 'minecraft'
 
 - name: set macos settings
   ansible.builtin.command: "{{ item }}"

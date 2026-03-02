@@ -21,6 +21,7 @@
     - 'steam'
     - 'discord'
     - 'minecraft'
+    - 'netnewswire'
 
 - name: set macos settings
   ansible.builtin.command: "{{ item }}"
